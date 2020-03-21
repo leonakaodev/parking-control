@@ -1,11 +1,11 @@
 <template>
-    <v-app id="teste">
+    <v-app>
         <v-app-bar color="orange darken-1" app>
             <v-btn v-if="back" text>
                 <v-icon>mdi-arrow-left</v-icon>
             </v-btn>
             <v-toolbar-title>{{ title }}</v-toolbar-title>
-            
+
             <v-spacer></v-spacer>
             <div v-if="!hideOptions">
                 <v-btn text class="px-0 mr-5">
@@ -68,10 +68,6 @@ export default {
 </script>
 
 <style>
-#teste {
-    height: 1000px;
-}
-
 .cursor-pointer>div{
     cursor: pointer;
 }
