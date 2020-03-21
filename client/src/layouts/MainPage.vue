@@ -5,7 +5,7 @@
                 <v-icon>mdi-arrow-left</v-icon>
             </v-btn>
             <v-toolbar-title>{{ title }}</v-toolbar-title>
-
+            
             <v-spacer></v-spacer>
             <div v-if="!hideOptions">
                 <v-btn text class="px-0 mr-5">
