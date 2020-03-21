@@ -1,5 +1,5 @@
 <template>
-    <MainPage title="Carros Avulsos">
+    <MainPage title="Veículos Avulsos">
         <v-container>
             <v-data-table
                 :headers="headers"
@@ -18,30 +18,18 @@
                         <v-spacer></v-spacer>
                         <v-dialog v-model="dialog" max-width="500px">
                             <template v-slot:activator="{ on }">
-                                <v-btn color="primary" dark class="mb-2" v-on="on">Novo avulso</v-btn>
+                                <v-btn color="primary" dark class="mb-2" v-on="on">Novo veículo</v-btn>
                             </template>
                             <v-card>
                                 <v-card-title>
-                                    <span class="headline">Adicionando avulso</span>
+                                    <span class="headline">Adicionando veículo</span>
                                 </v-card-title>
 
                                 <v-card-text>
                                     <v-container>
                                         <v-row>
                                             <v-col cols="12" sm="6" md="4">
-                                                <v-text-field v-model="editedItem.name" label="Dessert name"></v-text-field>
-                                            </v-col>
-                                            <v-col cols="12" sm="6" md="4">
-                                                <v-text-field v-model="editedItem.calories" label="Calories"></v-text-field>
-                                            </v-col>
-                                            <v-col cols="12" sm="6" md="4">
-                                                <v-text-field v-model="editedItem.fat" label="Fat (g)"></v-text-field>
-                                            </v-col>
-                                            <v-col cols="12" sm="6" md="4">
-                                                <v-text-field v-model="editedItem.carbs" label="Carbs (g)"></v-text-field>
-                                            </v-col>
-                                            <v-col cols="12" sm="6" md="4">
-                                                <v-text-field v-model="editedItem.protein" label="Protein (g)"></v-text-field>
+                                                <v-text-field v-model="newItem.name" label="Qual veículo entrou?"></v-text-field>
                                             </v-col>
                                         </v-row>
                                     </v-container>
@@ -50,6 +38,7 @@
                                 <v-card-actions>
                                     <v-spacer></v-spacer>
                                     <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
+                                    <v-btn color="primary" text @click="add">Adicionar</v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
@@ -57,14 +46,12 @@
                 </template>
                 <template v-slot:item.actions="{ item }">
                     <v-icon
-                        small
                         class="mr-2"
                         @click="openItem(item)"
                     >
                         mdi-open-in-new
                     </v-icon>
                     <v-icon
-                        small
                         class="mr-2"
                         @click="deleteItem(item)"
                     >
@@ -72,7 +59,7 @@
                     </v-icon>
                 </template>
                 <template v-slot:no-data>
-                   Nenhum avulso encontrado
+                   Nenhum veículo avulso encontrado
                 </template>
             </v-data-table>
         </v-container>
@@ -87,7 +74,7 @@ export default {
         dialog: false,
         headers: [
             {
-                text: 'Carro',
+                text: 'Veículo',
                 align: 'start',
                 sortable: false,
                 value: 'name',
@@ -99,23 +86,11 @@ export default {
         cars: [],
         editedIndex: -1,
 
-        editedItem: {
-            name: '',
-            calories: 0,
-            fat: 0,
-            carbs: 0,
-            protein: 0,
-        },
+        newItem: {},
     }),
 
     components: {
         MainPage
-    },
-
-    computed: {
-        formTitle () {
-            return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-        },
     },
 
     watch: {
@@ -137,35 +112,48 @@ export default {
 
         openItem (item) {
             this.editedIndex = this.cars.indexOf(item)
-            this.editedItem = Object.assign({}, item)
+            this.newItem = Object.assign({}, item)
             this.dialog = true
         },
 
-        deleteItem (item) {
-            this.$swal.fire({
-                title: 'Are you sure?',
-                text: 'You won\'t be able to revert this!',
+        async deleteItem (item) {
+            const confirmed = this.$swal.fire({
+                title: 'Tem certeza que deseja excluir este veículo?',
+                text: 'Se você exclui-lo não será possível recuperar suas informações',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.value) {
-                    this.$swal.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
-                    )
-                }
+                confirmButtonText: 'Sim, tenho certeza'
             })
-            console.log(item);
-            // this.cars.splice(this.cars.indexOf(item), 1)
+
+            if(confirmed){
+                this.cars.splice(this.cars.indexOf(item), 1)
+            }
         },
 
         close () {
             this.dialog = false
         },
+
+        add () {
+            let today = new Date();
+            let dd = String(today.getDate()).padStart(2, '0')
+            let mm = String(today.getMonth() + 1).padStart(2, '0')
+            let yyyy = today.getFullYear()
+            let date = dd + '/' + mm + '/' + yyyy
+            let hh = String(today.getHours()).padStart(2, '0')
+            let ii = String(today.getMinutes()).padStart(2, '0')
+            let hour = hh + ':' + ii
+
+            this.newItem.date = date
+            this.newItem.hour = hour
+
+            this.cars.push(this.newItem);
+
+            this.newItem = {}
+            this.dialog = false
+        }
     },
 }
 </script>
