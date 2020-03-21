@@ -1,5 +1,7 @@
 <template>
-    <MainPage>
+    <MainPage
+        title="Carros Avulsos"
+    >
 
     </MainPage>
 </template>
