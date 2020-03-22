@@ -16,7 +16,35 @@
   "dependencies": {
     "apollo-server": "^2.11.0",
     "dotenv": "^8.2.0",
+    "eslint": "^6.8.0",
     "graphql": "^14.6.0",
     "mysql": "^2.18.1"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true,
+      "es6": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 2017
+    },
+    "extends": [
+      "eslint:recommended"
+    ],
+    "rules": {
+      "quotes": [
+        "error",
+        "single"
+      ],
+      "indent": [
+        "error",
+        4
+      ],
+      "semi": [
+        "error",
+        "always"
+      ]
+    }
   }
 }

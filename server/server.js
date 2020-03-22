@@ -1,4 +1,4 @@
-const { ApolloServer } = require("apollo-server");
+const { ApolloServer } = require('apollo-server');
 const env = require('./config');
 
 console.log(env);
@@ -19,10 +19,10 @@ const typeDefs = `
 
 const resolvers = {
     Query: {},
-}
+};
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
 const port = env.setup_port;
-console.log("Server Running in the port: "+port);
+console.log('Server Running in the port: '+port);
 server.listen(port);
