@@ -1,7 +1,7 @@
 const { ApolloServer } = require('apollo-server');
+const database = require('./database');
 const env = require('./config');
 
-console.log(env);
 const typeDefs = `
     type Vehicle {
         id: Int

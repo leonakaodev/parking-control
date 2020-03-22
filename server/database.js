@@ -1,15 +1,16 @@
 var mysql = require('mysql');
+const env = require('./config');
 
 var con = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'namegator'
+    host: env.db_host,
+    user: env.db_user,
+    password: env.db_pass,
+    database: env.db_name
 });
 
 con.connect(function(err) {
     if (err) throw err;
-    console.log('Connected!');
+    console.log('Database Connected!');
 });
 
 exports.execute = function(query, values) {
