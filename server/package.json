@@ -1,0 +1,21 @@
+{
+  "name": "parking-control-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "apollo",
+    "graphql",
+    "api"
+  ],
+  "author": "Leonardo Nakao",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.11.0",
+    "graphql": "^14.6.0",
+    "mysql": "^2.18.1"
+  }
+}
