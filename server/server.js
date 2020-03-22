@@ -1,5 +1,7 @@
 const { ApolloServer } = require("apollo-server");
+const env = require('./config');
 
+console.log(env);
 const typeDefs = `
     type Vehicle {
         id: Int
@@ -21,6 +23,6 @@ const resolvers = {
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
-const port = 4000;
+const port = env.setup_port;
 console.log("Server Running in the port: "+port);
 server.listen(port);
