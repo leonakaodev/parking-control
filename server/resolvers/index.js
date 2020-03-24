@@ -4,6 +4,9 @@ module.exports = {
     Query: {
         async vehicles(_, args){
             return await service.getVehiclesByFinished(args.finished);
+        },
+        async vehicleById(_, args){
+            return await service.getVehicleById(args.id);
         }
     },
     Mutation: {

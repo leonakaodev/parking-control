@@ -22,6 +22,7 @@ module.exports = `
 
     type Query {
         vehicles (finished: Boolean): [Vehicle]
+        vehicleById (id: Int): Vehicle
     }
 
     input VehicleInput {
