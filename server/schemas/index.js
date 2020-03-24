@@ -23,4 +23,14 @@ module.exports = `
     type Query {
         vehicles (finished: Boolean): [Vehicle]
     }
+
+    input VehicleInput {
+        name: String
+        note: String
+        created_by: Int
+    }
+
+    type Mutation {
+        saveVehicle(vehicle: VehicleInput) : Vehicle
+    }
 `;
