@@ -7,6 +7,10 @@ module.exports = {
         },
         async vehicleById(_, args){
             return await service.getVehicleById(args.id);
+        },
+        async price(_, args){
+            const value = await service.getPrice(args.id);
+            return { value };
         }
     },
     Mutation: {

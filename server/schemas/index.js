@@ -20,9 +20,14 @@ module.exports = `
         whole_price: Float
     }
 
+    type Price {
+        value: Float
+    }
+
     type Query {
         vehicles (finished: Boolean): [Vehicle]
         vehicleById (id: Int): Vehicle
+        price (id: Int): Price
     }
 
     input VehicleInput {
