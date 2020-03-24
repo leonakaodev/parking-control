@@ -11,6 +11,9 @@ module.exports = {
         async price(_, args){
             const value = await service.getPrice(args.id);
             return { value };
+        },
+        async settings(){
+            return await service.getSettings();
         }
     },
     Mutation: {

@@ -15,7 +15,7 @@ module.exports = `
         finished: Boolean
     }
 
-    type Setting {
+    type Settings {
         half_price: Float
         whole_price: Float
     }
@@ -28,6 +28,7 @@ module.exports = `
         vehicles (finished: Boolean): [Vehicle]
         vehicleById (id: Int): Vehicle
         price (id: Int): Price
+        settings: Settings
     }
 
     input VehicleInput {

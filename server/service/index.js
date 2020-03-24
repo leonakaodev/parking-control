@@ -40,3 +40,7 @@ exports.getPrice = async function(vehicle) {
     const date = result[0].created_at;
     return calculatePrice(date);
 };
+
+exports.getSettings = async function() {
+    return await settings();
+};
