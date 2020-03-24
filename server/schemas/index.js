@@ -1,17 +1,26 @@
-const typeUser = require('./users');
-const typeVehicle = require('./vehicles');
-const typeSetting = require('./settings');
+module.exports = `
+    type User {
+        id: Int
+        name: String
+        last_access: String
+        finished: Boolean
+    }
 
-const typeDefs = `
-    ${typeUser}
+    type Vehicle {
+        id: Int
+        name: String
+        note: String
+        date: String
+        hour: String
+        finished: Boolean
+    }
 
-    ${typeVehicle}
-
-    ${typeSetting}
+    type Setting {
+        half_price: Float
+        whole_price: Float
+    }
 
     type Query {
         vehicles (finished: Boolean): [Vehicle]
     }
 `;
-
-module.exports = typeDefs;
