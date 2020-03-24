@@ -26,8 +26,9 @@
       "node": true,
       "es6": true
     },
+    "parser": "babel-eslint",
     "parserOptions": {
-        "ecmaVersion": 2017
+      "ecmaVersion": 2017
     },
     "extends": [
       "eslint:recommended"
@@ -46,5 +47,8 @@
         "always"
       ]
     }
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0"
   }
 }
