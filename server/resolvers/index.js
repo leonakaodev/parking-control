@@ -24,6 +24,9 @@ module.exports = {
         },
         async finishVehicle(_, args){
             return await service.setVehicleFinished(args.vehicleId);
+        },
+        async removeVehicle(_, args){
+            return await service.setVehicleRemoved(args.vehicleId);
         }
     }
 };

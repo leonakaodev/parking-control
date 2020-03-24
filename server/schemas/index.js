@@ -40,5 +40,6 @@ module.exports = `
     type Mutation {
         saveVehicle(vehicle: VehicleInput): Vehicle
         finishVehicle(vehicleId: Int): Boolean
+        removeVehicle(vehicleId: Int): Boolean
     }
 `;
