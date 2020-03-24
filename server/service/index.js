@@ -35,6 +35,11 @@ exports.saveVehicle = async function(vehicle) {
     return result.insertId;
 };
 
+exports.setVehicleFinished = async function(id) {
+    const result = await database.execute('UPDATE vehicles SET finished = 1 WHERE id = ?', [id]);
+    return result.affectedRows > 0;
+};
+
 exports.getPrice = async function(vehicle) {
     const result = await database.execute('SELECT created_at FROM vehicles WHERE removed = 0 AND id = ?', [vehicle]);
     const date = result[0].created_at;

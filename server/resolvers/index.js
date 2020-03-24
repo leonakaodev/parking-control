@@ -21,6 +21,9 @@ module.exports = {
             const vehicle = args.vehicle;
             const id = await service.saveVehicle(vehicle);
             return await service.getVehicleById(id);
+        },
+        async finishVehicle(_, args){
+            return await service.setVehicleFinished(args.vehicleId);
         }
     }
 };
