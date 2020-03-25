@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios/dist/axios';
 
 Vue.use(Vuex)
 
@@ -27,24 +26,19 @@ export default new Vuex.Store({
         async login(context, payload) {
             const { user, password } = payload;
             if(!user || !password) return false;
-            console.log(payload);
-            const response = await axios({
-                url: 'http://localhost:4000',
-                method: 'post',
-                data: {
-                    query: `
-						mutation ($user: String, $password: String) {
-							user: login(user: $user, password: $password) {
-								id,
-								name,
-								hash
-							}
-						}
-					`,
-                    variables: {
-                        user,
-                        password
+            const response = await Vue.axios.post('http://localhost:4000', {
+                query: `
+                    mutation ($user: String, $password: String) {
+                        user: login(user: $user, password: $password) {
+                            id,
+                            name,
+                            hash
+                        }
                     }
+                `,
+                variables: {
+                    user,
+                    password
                 }
             });
             const currentUser = response.data.data.user;
