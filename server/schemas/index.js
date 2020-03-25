@@ -41,5 +41,6 @@ module.exports = `
         saveVehicle(vehicle: VehicleInput): Vehicle
         finishVehicle(vehicleId: Int): Boolean
         removeVehicle(vehicleId: Int): Boolean
+        login(user: String, password: String): String
     }
 `;

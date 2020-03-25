@@ -1,4 +1,5 @@
 const database = require('./database');
+const crypto = require('crypto');
 
 const calculatePrice = async function(date){
     const dateNow = new Date();
@@ -13,8 +14,8 @@ const calculatePrice = async function(date){
 };
 
 const settings = async function() {
-    const result = await database.execute('SELECT whole_price, half_price FROM settings');
-    return result[0];
+    const [result] = await database.execute('SELECT whole_price, half_price FROM settings');
+    return result;
 };
 
 exports.getVehicles = function() {
@@ -26,8 +27,8 @@ exports.getVehiclesByFinished = function(finished) {
 };
 
 exports.getVehicleById = async function(id) {
-    const result = await database.execute('SELECT id, name, note, cast(created_at as date) as date, cast(created_at as time) as hour FROM vehicles WHERE removed = 0 AND id = ?', [id]);
-    return result[0];
+    const [result] = await database.execute('SELECT id, name, note, cast(created_at as date) as date, cast(created_at as time) as hour FROM vehicles WHERE removed = 0 AND id = ?', [id]);
+    return result;
 };
 
 exports.saveVehicle = async function(vehicle) {
@@ -46,11 +47,25 @@ exports.setVehicleRemoved = async function(id) {
 };
 
 exports.getPrice = async function(vehicle) {
-    const result = await database.execute('SELECT created_at FROM vehicles WHERE removed = 0 AND id = ?', [vehicle]);
-    const date = result[0].created_at;
+    const [result] = await database.execute('SELECT created_at FROM vehicles WHERE removed = 0 AND id = ?', [vehicle]);
+    const date = result.created_at;
     return calculatePrice(date);
 };
 
 exports.getSettings = async function() {
     return await settings();
+};
+
+exports.login = async function(user, password) {
+    const [result] = await database.execute('SELECT id, password FROM users WHERE username = ?', [user]);
+    password = crypto.createHash('md5').update(password).digest('hex');
+    if(result && password === result.password) {
+        const time = Date.now();
+        const base = time + 'nko' + result.id;
+        const hash = crypto.createHash('md5').update(base).digest('hex');
+        database.execute('UPDATE users SET hash = ? WHERE id = ?', [hash, result.id]);
+        return hash;
+    } else {
+        return null;
+    }
 };

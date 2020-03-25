@@ -27,6 +27,9 @@ module.exports = {
         },
         async removeVehicle(_, args){
             return await service.setVehicleRemoved(args.vehicleId);
+        },
+        async login(_, args){
+            return await service.login(args.user, args.password);
         }
     }
 };
