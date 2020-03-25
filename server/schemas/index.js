@@ -2,8 +2,7 @@ module.exports = `
     type User {
         id: Int
         name: String
-        last_access: String
-        finished: Boolean
+        hash: String
     }
 
     type Vehicle {
@@ -41,6 +40,6 @@ module.exports = `
         saveVehicle(vehicle: VehicleInput): Vehicle
         finishVehicle(vehicleId: Int): Boolean
         removeVehicle(vehicleId: Int): Boolean
-        login(user: String, password: String): String
+        login(user: String, password: String): User
     }
 `;

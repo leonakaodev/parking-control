@@ -5,6 +5,14 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
+        session: {
+            hash: undefined
+        },
+        user: {
+            logged: false,
+            id: undefined,
+            name: undefined
+        }
     },
     mutations: {
     },

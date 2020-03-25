@@ -57,14 +57,19 @@ exports.getSettings = async function() {
 };
 
 exports.login = async function(user, password) {
-    const [result] = await database.execute('SELECT id, password FROM users WHERE username = ?', [user]);
+    const [result] = await database.execute('SELECT id, name, password FROM users WHERE username = ?', [user]);
     password = crypto.createHash('md5').update(password).digest('hex');
     if(result && password === result.password) {
+        const { id, name } = result;
         const time = Date.now();
         const base = time + 'nko' + result.id;
         const hash = crypto.createHash('md5').update(base).digest('hex');
-        database.execute('UPDATE users SET hash = ?, last_access = now() WHERE id = ?', [hash, result.id]);
-        return hash;
+        database.execute('UPDATE users SET hash = ?, last_access = now() WHERE id = ?', [hash, id]);
+        return {
+            id,
+            name,
+            hash
+        };
     } else {
         return null;
     }
