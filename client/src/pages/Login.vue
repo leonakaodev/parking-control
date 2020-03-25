@@ -62,7 +62,8 @@
 </template>
 
 <script>
-import BlankPage from '../layouts/BlankPage.vue'
+import BlankPage from '../layouts/BlankPage.vue';
+// import { mapActions } from 'vuex';
 
 export default {
     data() {
@@ -76,11 +77,15 @@ export default {
         BlankPage
     },
     methods: {
-        login(){
+        async login() {
             this.loading = true;
-            this.$router.push('/dashboard');
+            const result = await this.$store.dispatch('login', { user: this.user, password: this.password });
+            if(result) {
+                this.$router.push('/dashboard');
+            }
+            this.loading = false;
         }
-    }
+    },
 }
 </script>
 
