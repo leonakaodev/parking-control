@@ -21,7 +21,6 @@ export default new Vuex.Store({
         },
         setSession(state, payload) {
             const { hash } = payload;
-            console.log(hash);
             state.session.hash = hash;
             Vue.axios.defaults.headers.common['Authorization'] = hash;
             localStorage.setItem('AuthToken', hash);

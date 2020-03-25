@@ -34,6 +34,7 @@
                                         <v-col cols="12">
                                             <v-text-field
                                                 v-model="password"
+                                                type="password"
                                                 label="Senha"
                                                 required
                                                 color="orange darken-1"
