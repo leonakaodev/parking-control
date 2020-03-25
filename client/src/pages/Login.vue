@@ -68,8 +68,8 @@ import BlankPage from '../layouts/BlankPage.vue';
 export default {
     data() {
         return {
-            user: undefined,
-            password: undefined,
+            user: 'user',
+            password: 'pass123',
             loading: false,
         }
     },
