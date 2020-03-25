@@ -3,6 +3,7 @@ CREATE TABLE `users` (
 	`name` varchar(255) NOT NULL,
 	`username` varchar(255) NOT NULL,
 	`password` varchar(255) NOT NULL,
+	`hash` varchar(255) DEFAULT NULL UNIQUE,
 	`created_at` DATETIME NOT NULL,
 	`updated_at` DATETIME DEFAULT NULL,
 	`last_access` DATETIME DEFAULT NULL,
