@@ -63,9 +63,15 @@ exports.login = async function(user, password) {
         const time = Date.now();
         const base = time + 'nko' + result.id;
         const hash = crypto.createHash('md5').update(base).digest('hex');
-        database.execute('UPDATE users SET hash = ? WHERE id = ?', [hash, result.id]);
+        database.execute('UPDATE users SET hash = ?, last_access = now() WHERE id = ?', [hash, result.id]);
         return hash;
     } else {
         return null;
     }
+};
+
+exports.getUserByHash = async function(hash) {
+    const [user] = await database.execute('SELECT id, name FROM users WHERE hash = ?', [hash]);
+
+    return user;
 };
