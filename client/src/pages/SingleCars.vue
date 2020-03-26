@@ -31,7 +31,7 @@
                                             <v-text-field v-model="newItem.name" label="Qual veículo entrou?"></v-text-field>
                                         </v-row>
                                         <v-row>
-                                            <v-textarea solo v-model="newItem.note" label="Observações"></v-textarea>
+                                            <v-textarea v-model="newItem.note" label="Observações"></v-textarea>
                                         </v-row>
                                     </v-container>
                                 </v-card-text>
