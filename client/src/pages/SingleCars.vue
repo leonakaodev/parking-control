@@ -48,7 +48,7 @@
                 <template v-slot:item.actions="{ item }">
                     <v-icon
                         class="mr-2"
-                        @click="openItem(item)"
+                        @click="openItem(item.id)"
                     >
                         mdi-open-in-new
                     </v-icon>
@@ -121,8 +121,8 @@ export default {
             this.getVehicles(false);
         },
 
-        openItem () {
-
+        openItem (id) {
+            this.$router.push(`/single-cars/${id}`);
         },
 
         async deleteItem (item) {
