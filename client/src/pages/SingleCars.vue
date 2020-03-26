@@ -3,7 +3,7 @@
         <v-container>
             <v-data-table
                 :headers="headers"
-                :items="cars"
+                :items="vehicles"
                 sort-by="calories"
                 class="elevation-1"
             >
@@ -69,6 +69,7 @@
 
 <script>
 import MainPage from '../layouts/MainPage.vue';
+import { mapState, mapActions } from 'vuex';
 
 export default {
     data: () => ({
@@ -84,7 +85,6 @@ export default {
             { text: 'Hora', value: 'hour' },
             { text: 'Actions', value: 'actions', sortable: false },
         ],
-        cars: [],
         editedIndex: -1,
 
         newItem: {},
@@ -104,11 +104,19 @@ export default {
         this.initialize()
     },
 
+    computed: {
+        ...mapState({
+            vehicles: state => state.vehicle.open
+        })
+    },
+
     methods: {
+        ...mapActions('vehicle', [
+            'getVehicles',
+        ]),
+
         initialize () {
-            this.cars = [
-                {name: 'Honda Branco', date: '20/03/2020', hour: '15:42'}
-            ]
+            this.getVehicles(false);
         },
 
         openItem (item) {

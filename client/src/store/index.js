@@ -3,6 +3,8 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+import VehicleModule from './modules/VehicleModule';
+
 export default new Vuex.Store({
     state: {
         session: {
@@ -57,4 +59,7 @@ export default new Vuex.Store({
             }
         }
     },
+    modules: {
+        vehicle: VehicleModule
+    }
 })
