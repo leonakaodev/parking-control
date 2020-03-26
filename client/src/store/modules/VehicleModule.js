@@ -109,6 +109,31 @@ export default {
                 alert('Ocorreu um erro ao deletar, tente novamente.');
                 return false;
             }
+        },
+        async getVehicle(_, paylaod) {
+            const id = paylaod;
+            try {
+                const response = await Vue.axios.post('/', {
+                    query: `
+                        query ($id: Int) {
+                            vehicle: vehicleById(id: $id) {
+                                id
+                                name
+                                note
+                                date
+                                hour
+                            }
+                        }
+                    `,
+                    variables: {
+                        id
+                    }
+                });
+                return response.data.data.vehicle;
+            } catch (err) {
+                alert('Veículo não encontrado, tente novamente.');
+                return {};
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <v-app-bar color="orange darken-1" app>
-            <v-btn v-if="back" text>
+            <v-btn v-if="back" text @click="backPage">
                 <v-icon>mdi-arrow-left</v-icon>
             </v-btn>
             <v-toolbar-title>{{ title }}</v-toolbar-title>
@@ -57,11 +57,14 @@ export default {
         }
     },
     methods: {
-        openSettings(){
+        openSettings() {
             console.log('Abrindo settings')
         },
-        logout(){
+        logout() {
             console.log('Fazendo logout')
+        },
+        backPage() {
+            this.$router.back();
         }
     }
 }
