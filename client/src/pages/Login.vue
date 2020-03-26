@@ -1,6 +1,6 @@
 <template>
     <BlankPage>
-        <v-container id="login" fill-height fluid>
+        <v-container class="login-container" fill-height fluid>
             <v-row align="center" justify="center">
                 <v-col cols="12">
                     <v-row justify="center" class="text-center">
@@ -91,7 +91,7 @@ export default {
 </script>
 
 <style>
-#login {
+.login-container {
     height: 100%;
     background-image: url('../assets/images/login-bg.jpg');
     background-repeat: no-repeat, repeat;
@@ -99,11 +99,12 @@ export default {
     background-size: cover;
 }
 
-#login h1,h2 {
+.login-container h1,
+.login-container h2 {
     color: white;
 }
 
-#login .huge {
+.login-container .huge {
     font-size: 3.5em;
 }
 </style>
