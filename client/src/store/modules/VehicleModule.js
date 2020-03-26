@@ -10,6 +10,10 @@ export default {
         setList(state, payload) {
             const { data, list } = payload;
             state[list] = data;
+        },
+        addOpenVehicle(state, payload) {
+            const vehicle = payload;
+            state.open.push(vehicle);
         }
     },
     actions: {
@@ -36,9 +40,39 @@ export default {
                     list: finished ? 'finished' : 'open',
                     data: vehicles
                 });
+                return true;
             } catch (err) {
                 alert('Ocorreu um erro ao buscar os veículos, tente novamente.');
+                return false;
             }
         },
+        async addVehicle(context, payload) {
+            let vehicle = payload;
+            const user = context.rootGetters.currentUser;
+            vehicle.created_by = parseInt(user.id);
+            try {
+                const response = await Vue.axios.post('/', {
+                    query: `
+                        mutation ($vehicle: VehicleInput) {
+                            vehicle: saveVehicle(vehicle: $vehicle) {
+                                id
+                                name
+                                date
+                                hour
+                            }
+                        }
+                    `,
+                    variables: {
+                        vehicle
+                    }
+                });
+                const newVehicle = response.data.data.vehicle;
+                context.commit('addOpenVehicle', newVehicle);
+                return true;
+            } catch (err) {
+                alert('Ocorreu um erro ao salvar, tente novamente.');
+                return false;
+            }
+        }
     }
 }

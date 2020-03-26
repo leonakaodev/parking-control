@@ -12,13 +12,15 @@ export default new Vuex.Store({
             hash: localStorage.getItem('AuthToken') || ''
         },
         user: {
-            id: undefined,
-            name: undefined
+            id: localStorage.getItem('userId') || '',
+            name: localStorage.getItem('userName') || ''
         }
     },
     mutations: {
         setUser(state, payload) {
             const { id, name } = payload;
+            localStorage.setItem('userId', id);
+            localStorage.setItem('userName', name);
             state.user = { id, name };
         },
         setSession(state, payload) {
@@ -57,6 +59,11 @@ export default new Vuex.Store({
                 context.commit('setSession', { hash: '' });
                 return false;
             }
+        }
+    },
+    getters: {
+        currentUser (state) {
+            return state.user;
         }
     },
     modules: {

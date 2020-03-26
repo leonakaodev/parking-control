@@ -31,7 +31,7 @@
                                             <v-text-field v-model="newItem.name" label="Qual veículo entrou?"></v-text-field>
                                         </v-row>
                                         <v-row>
-                                            <v-textarea solo v-model="newItem.description" label="Observações"></v-textarea>
+                                            <v-textarea solo v-model="newItem.note" label="Observações"></v-textarea>
                                         </v-row>
                                     </v-container>
                                 </v-card-text>
@@ -113,6 +113,7 @@ export default {
     methods: {
         ...mapActions('vehicle', [
             'getVehicles',
+            'addVehicle'
         ]),
 
         initialize () {
@@ -145,23 +146,12 @@ export default {
             this.dialog = false
         },
 
-        add () {
-            let today = new Date();
-            let dd = String(today.getDate()).padStart(2, '0')
-            let mm = String(today.getMonth() + 1).padStart(2, '0')
-            let yyyy = today.getFullYear()
-            let date = dd + '/' + mm + '/' + yyyy
-            let hh = String(today.getHours()).padStart(2, '0')
-            let ii = String(today.getMinutes()).padStart(2, '0')
-            let hour = hh + ':' + ii
-
-            this.newItem.date = date
-            this.newItem.hour = hour
-
-            this.cars.push(this.newItem);
-
-            this.newItem = {}
-            this.dialog = false
+        async add () {
+            const success = await this.addVehicle({ name: this.newItem.name, note: this.newItem.note });
+            if(success) {
+                this.newItem = {};
+                this.dialog = false;
+            }
         }
     },
 }
