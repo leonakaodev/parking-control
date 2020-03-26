@@ -31,18 +31,18 @@ exports.getVehicleById = async function(id) {
     return result;
 };
 
-exports.saveVehicle = async function(vehicle) {
-    const result = await database.execute('INSERT INTO vehicles (name, note, created_by) VALUES ?', [[[vehicle.name, vehicle.note, vehicle.created_by]]]);
+exports.saveVehicle = async function(vehicle, user) {
+    const result = await database.execute('INSERT INTO vehicles (name, note, created_by) VALUES ?', [[[vehicle.name, vehicle.note, user]]]);
     return result.insertId;
 };
 
-exports.setVehicleFinished = async function(id) {
-    const result = await database.execute('UPDATE vehicles SET finished = 1 WHERE id = ?', [id]);
+exports.setVehicleFinished = async function(id, user) {
+    const result = await database.execute('UPDATE vehicles SET finished = 1, finished_by = ?, updated_by = ? WHERE id = ?', [user, user, id]);
     return result.affectedRows > 0;
 };
 
-exports.setVehicleRemoved = async function(id) {
-    const result = await database.execute('UPDATE vehicles SET removed = 1 WHERE id = ?', [id]);
+exports.setVehicleRemoved = async function(id, user) {
+    const result = await database.execute('UPDATE vehicles SET removed = 1, removed_by = ?, updated_by = ? WHERE id = ?', [user, user, id]);
     return result.affectedRows > 0;
 };
 

@@ -52,8 +52,6 @@ export default {
         },
         async addVehicle(context, payload) {
             let vehicle = payload;
-            const user = context.rootGetters.currentUser;
-            vehicle.created_by = parseInt(user.id);
             try {
                 const response = await Vue.axios.post('/', {
                     query: `

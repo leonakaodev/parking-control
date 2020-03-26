@@ -33,7 +33,6 @@ module.exports = `
     input VehicleInput {
         name: String
         note: String
-        created_by: Int
     }
 
     type Mutation {

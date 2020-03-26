@@ -27,16 +27,16 @@ module.exports = {
         async saveVehicle(_, args, context){
             if(!context.auth) throw new AuthenticationError(AuthenticationErrorMessage);
             const vehicle = args.vehicle;
-            const id = await service.saveVehicle(vehicle);
+            const id = await service.saveVehicle(vehicle, context.user.id);
             return await service.getVehicleById(id);
         },
         async finishVehicle(_, args, context){
             if(!context.auth) throw new AuthenticationError(AuthenticationErrorMessage);
-            return await service.setVehicleFinished(args.vehicleId);
+            return await service.setVehicleFinished(args.vehicleId, context.user.id);
         },
         async removeVehicle(_, args, context){
             if(!context.auth) throw new AuthenticationError(AuthenticationErrorMessage);
-            return await service.setVehicleRemoved(args.vehicleId);
+            return await service.setVehicleRemoved(args.vehicleId, context.user.id);
         },
         async login(_, args){
             return await service.login(args.user, args.password);
