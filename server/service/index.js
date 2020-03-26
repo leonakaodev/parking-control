@@ -19,11 +19,11 @@ const settings = async function() {
 };
 
 exports.getVehicles = function() {
-    return database.execute('SELECT id, name, note, cast(created_at as date) as date, cast(created_at as time) as hour FROM vehicles WHERE removed = 0');
+    return database.execute('SELECT id, name, note, cast(cast(created_at as date) as char) as date, cast(created_at as time) as hour FROM vehicles WHERE removed = 0');
 };
 
 exports.getVehiclesByFinished = function(finished) {
-    return database.execute('SELECT id, name, note, cast(created_at as date) as date, cast(created_at as time) as hour FROM vehicles WHERE removed = 0 AND finished = ?', [finished]);
+    return database.execute('SELECT id, name, note, cast(cast(created_at as date) as char) as date, cast(created_at as time) as hour FROM vehicles WHERE removed = 0 AND finished = ?', [finished]);
 };
 
 exports.getVehicleById = async function(id) {
