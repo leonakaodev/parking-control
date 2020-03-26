@@ -54,7 +54,7 @@
                     </v-icon>
                     <v-icon
                         class="mr-2"
-                        @click="deleteItem(item)"
+                        @click="deleteVehicle(item)"
                     >
                         mdi-delete
                     </v-icon>
@@ -113,17 +113,16 @@ export default {
     methods: {
         ...mapActions('vehicle', [
             'getVehicles',
-            'addVehicle'
+            'addVehicle',
+            'deleteVehicle'
         ]),
 
         initialize () {
             this.getVehicles(false);
         },
 
-        openItem (item) {
-            this.editedIndex = this.cars.indexOf(item)
-            this.newItem = Object.assign({}, item)
-            this.dialog = true
+        openItem () {
+
         },
 
         async deleteItem (item) {

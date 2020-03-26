@@ -14,6 +14,10 @@ export default {
         addOpenVehicle(state, payload) {
             const vehicle = payload;
             state.open.push(vehicle);
+        },
+        removeOpenVehicle(state, payload) {
+            const id = payload;
+            state.open = state.open.filter(vehicle => vehicle.id !== id);
         }
     },
     actions: {
@@ -71,6 +75,40 @@ export default {
                 return true;
             } catch (err) {
                 alert('Ocorreu um erro ao salvar, tente novamente.');
+                return false;
+            }
+        },
+        async deleteVehicle(context, payload) {
+            const { id } = payload;
+            const confirmed = await Vue.swal.fire({
+                title: 'Tem certeza que deseja excluir este veículo?',
+                text: 'Se você exclui-lo não será possível recuperar suas informações',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim, tenho certeza'
+            })
+
+            if(!confirmed){ return false; }
+            try {
+                const response = await Vue.axios.post('/', {
+                    query: `
+                        mutation ($vehicleId: Int) {
+                            removed: removeVehicle(vehicleId: $vehicleId)
+                        }
+                    `,
+                    variables: {
+                        vehicleId: id
+                    }
+                });
+                const success = response.data.data.removed;
+                if(success) {
+                    context.commit('removeOpenVehicle', id);
+                }
+                return success;
+            } catch (err) {
+                alert('Ocorreu um erro ao deletar, tente novamente.');
                 return false;
             }
         }
