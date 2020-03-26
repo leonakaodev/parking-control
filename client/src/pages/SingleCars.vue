@@ -28,9 +28,10 @@
                                 <v-card-text>
                                     <v-container>
                                         <v-row>
-                                            <v-col cols="12" sm="6" md="4">
-                                                <v-text-field v-model="newItem.name" label="Qual veículo entrou?"></v-text-field>
-                                            </v-col>
+                                            <v-text-field v-model="newItem.name" label="Qual veículo entrou?"></v-text-field>
+                                        </v-row>
+                                        <v-row>
+                                            <v-textarea solo v-model="newItem.description" label="Observações"></v-textarea>
                                         </v-row>
                                     </v-container>
                                 </v-card-text>
