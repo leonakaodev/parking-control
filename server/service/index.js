@@ -27,7 +27,7 @@ exports.getVehiclesByFinished = function(finished) {
 };
 
 exports.getVehicleById = async function(id) {
-    const [result] = await database.execute('SELECT id, name, note, cast(created_at as date) as date, cast(created_at as time) as hour FROM vehicles WHERE removed = 0 AND id = ?', [id]);
+    const [result] = await database.execute('SELECT id, name, note, cast(cast(created_at as date) as char) as date, cast(created_at as time) as hour FROM vehicles WHERE removed = 0 AND id = ?', [id]);
     return result;
 };
 
