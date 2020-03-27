@@ -15,4 +15,9 @@ export default {
 body {
     font-family: "Roboto", sans-serif;
 }
+
+.container {
+    padding-left: 50px !important;
+    padding-right: 50px !important;
+}
 </style>
