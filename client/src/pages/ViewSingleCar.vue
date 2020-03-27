@@ -5,9 +5,9 @@
                 <v-col cols="6">
                     <h2>Informações de Entrada</h2>
                     <strong>Dia</strong>
-                    <p>{{ vehicle.date }}</p>
+                    <p>{{ vehicle.date | formatDate }}</p>
                     <strong>Horário</strong>
-                    <p>{{ vehicle.hour }}</p>
+                    <p>{{ vehicle.date | formatTime }}</p>
                 </v-col>
                 <v-col cols="6">
                     <h2>Valores</h2>

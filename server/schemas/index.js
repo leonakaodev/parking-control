@@ -10,7 +10,6 @@ module.exports = `
         name: String
         note: String
         date: String
-        hour: String
         finished: Boolean
     }
 

@@ -31,7 +31,6 @@ export default {
                                 id
                                 name
                                 date
-                                hour
                             }
                         }
                     `,
@@ -60,7 +59,6 @@ export default {
                                 id
                                 name
                                 date
-                                hour
                             }
                         }
                     `,
@@ -121,7 +119,6 @@ export default {
                                 name
                                 note
                                 date
-                                hour
                             }
                         }
                     `,

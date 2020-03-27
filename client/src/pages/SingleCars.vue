@@ -7,6 +7,13 @@
                 sort-by="calories"
                 class="elevation-1"
             >
+                <template v-slot:item.date="{ item }">
+                    {{ item.date | formatDate }}
+                </template>
+                <template v-slot:item.hour="{ item }">
+                    {{ item.date | formatTime }}
+                </template>
+
                 <template v-slot:top>
                     <v-toolbar flat color="white">
                         <v-toolbar-title>Avulsos</v-toolbar-title>
