@@ -5,13 +5,15 @@ import store from './store'
 import router from './router'
 import VueSweetalert2 from 'vue-sweetalert2'
 import axios from 'axios'
-import VueAxios from 'vue-axios'
+import VueAxios from 'vue-axios';
+import VueIntl from'vue-intl';
 
 Vue.use(VueAxios, axios);
-
+Vue.use(VueIntl);
 Vue.use(VueSweetalert2);
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+Vue.setLocale('pt-BR');
 
 new Vue({
     vuetify,
