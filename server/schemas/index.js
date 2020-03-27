@@ -20,6 +20,7 @@ module.exports = `
     }
 
     type Price {
+        time: String
         value: Float
     }
 

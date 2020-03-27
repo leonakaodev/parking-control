@@ -1,6 +1,19 @@
 const database = require('./database');
 const crypto = require('crypto');
 
+const msToTime = function (duration) {
+    var milliseconds = parseInt((duration % 1000) / 100),
+        seconds = Math.floor((duration / 1000) % 60),
+        minutes = Math.floor((duration / (1000 * 60)) % 60),
+        hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+    hours = (hours < 10) ? '0' + hours : hours;
+    minutes = (minutes < 10) ? '0' + minutes : minutes;
+    seconds = (seconds < 10) ? '0' + seconds : seconds;
+
+    return hours + ':' + minutes + ':' + seconds + '.' + milliseconds;
+};
+
 const calculatePrice = async function(date){
     const dateNow = new Date();
     date = new Date(date);
@@ -8,9 +21,12 @@ const calculatePrice = async function(date){
     const fullhours = Math.floor(time);
     const minutes = time % 1;
     const { whole_price, half_price } = await settings();
-    var price = fullhours * whole_price;
-    price += minutes > 0.5 ? whole_price : half_price;
-    return price;
+    var value = fullhours * whole_price;
+    value += minutes > 0.5 ? whole_price : half_price;
+    return {
+        value,
+        time: msToTime(time)
+    };
 };
 
 const settings = async function() {
